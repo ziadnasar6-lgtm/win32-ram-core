@@ -1,52 +1,54 @@
-# 🖥️ Windows RAM Monitor & Task Manager Custom Utility
+# 🖥️ Win32 Native Memory Guardian & Systems Architecture Utility
 
-A lightweight, high-performance command-line utility built in **C++** utilizing the native **Windows API (Win32)** to monitor system memory internals, audit individual process layouts, and perform granular comparisons between running applications.
+A high-performance system monitoring and security auditing command-line engine built natively in **C++** utilizing core **Windows Core APIs (Win32)**. This utility interfaces directly with the kernel to extract global memory states, benchmark isolated applications, handle side-by-side performance footprints, and deploy an active threshold monitor (**Memory Guardian Engine**) over target tasks.
 
-Designed with a stylized ANSI-colored terminal layout featuring a tailored dark cyber theme.
-
----
-
-## 🚀 Key Features
-
-* **Global RAM Auditing:** Real-time diagnostics of Total, Available, Used, and Free physical memory extracted natively via structural platform states.
-* **Granular Process Tracking:** Deep-dive inspection of any active application using its Process ID (PID) to inspect its precise memory footprint.
-* **Process vs Process Analytics:** Comparative performance analysis engine that highlights memory hogs and evaluates memory leaks or high page fault frequencies side-by-side.
-* **UTF-8 Support:** Native console emoji mapping using Windows code-page layers to ensure custom visual assets display perfectly.
+Featuring a fully customized UI rendered directly via advanced custom ANSI styling maps.
 
 ---
 
-## 🛠️ Deep Dive: Windows API Internals Used
+## 🚀 Architectural Pipelines & Core Features
 
-This project bypasses generic wrappers to interact directly with the Windows Subsystem Kernel using:
-1. `GlobalMemoryStatusEx`: Populates the `MEMORYSTATUSEX` structure to gather high-precision structural allocation data of both global physical and virtual memory addresses.
-2. `OpenProcess`: Opens a local process object with `PROCESS_QUERY_INFORMATION` and `PROCESS_VM_READ` security access rights.
-3. `GetProcessMemoryInfo`: Injects and handles data across `PROCESS_MEMORY_COUNTERS_EX` to extract:
-   * **Working Set Size:** The current physical memory pages mapped into the RAM pool.
-   * **Private Usage:** Dedicated memory strictly allocated for the selected process context (critical for detecting memory leaks).
-   * **Page Fault Count:** Total structural overhead occurrences requiring disk virtual memory indexing.
+* **Pipeline 1: Global Architectural Mapping:** Real-time structural validation of System Physical RAM load states, address pools, allocation spaces, and Virtual memory limits.
+* **Pipeline 2: Deep Process Memory Auditing:** Deep-dive memory inspection using isolated target PIDs to unpack structural stats: Active Working Set, Peak Allocation footprint, and structural internal Private Allocations.
+* **Pipeline 3: Streaming Performance Engine:** Live asynchronous system interface running continuous refresh timers to log global RAM consumption spikes per second.
+* **Pipeline 4: Binary Benchmarking Matrix:** Comparative side-by-side analysis mapping two distinct operational processes to evaluate allocation deltas, memory overhead spikes, and cache validation properties.
+* **Pipeline 5: Active Memory Guardian Threshold:** Security runtime guard that watches targeted runtime environments, monitors active allocations, and fires system threshold alerts immediately upon boundary violation.
 
 ---
 
-## 📊 Code Architecture: Namespaces Matrix
+## 🛠️ Kernel API Hooking Strategies Used
 
-The project separates functional logical domains into highly specialized internal modules:
-
-### 1. `zoz::` Domain
-* `all_info_about_system()`: Parses, scales, and prints global system hardware metrics converted seamlessly from bytes into Gigabytes (GB).
-* `mem_for_one_process(DWORD pid)`: Evaluates standalone runtime targets, safely tracking invalid resource queries or closed handles.
-
-### 2. `nassar::` Domain
-* `show_ram_usage()`: Initializes a system-loop refresh system to display persistent performance updates.
-* `compar_two_pid(DWORD pid_one, DWORD pid_two)`: Evaluates absolute usage deltas ($Used_1 - Used_2$) and prints isolated, context-aware alert frames based on performance priority.
+This project directly hooks and evaluates state changes within the Windows Subsystem Kernel using:
+1. `GlobalMemoryStatusEx` + `MEMORYSTATUSEX`: Hooks active memory management registries to poll immediate metrics regarding system physical bounds.
+2. `OpenProcess` (`PROCESS_QUERY_INFORMATION` | `PROCESS_VM_READ`): Injects customized security permission descriptors over structural target handlers safely.
+3. `GetProcessMemoryInfo` + `PROCESS_MEMORY_COUNTERS_EX`: Tracks high-fidelity internal layout properties:
+   * **Working Set Size:** Real-time RAM space mapped for the physical scope execution.
+   * **Private Usage:** Dedicated block properties allocated specifically for the context space (essential for analyzing leakage variables).
+   * **Page Fault Count:** Internal operational faults indicating mapping lookups tracking to the secondary disk store.
 
 ---
 
-## 📦 Compilation & Setup
+## 📁 Code Domains Structure: Namespaces
 
-### Prerequisites
-* Operating System: **Windows** 7 / 8 / 10 / 11.
-* Compiler: Any standard **MSVC** or **MinGW** C++ compiler supporting standard library mapping.
+The system enforces isolation of logical components through clean modular architecture configurations:
 
-### Build via Command Line (MinGW Example)
+### 🔷 `zoz::` Logic Core
+* `memoryGlobalInformation()`: Gathers global storage configurations, processes limits, and outputs standard scalable units (Gigabytes).
+* `memForeachProcess(DWORD pid)`: Inspects system tasks with functional exception-handling protocols mapping inaccessible or restricted descriptors.
+
+### 🔷 `nassar::` System Management Hub
+* `showMemoryPerSecond()`: Fires low-overhead terminal UI tracking using strategic console cursor mapping `SetConsoleCursorPosition`.
+* `compareTwoPids(DWORD pid_one, DWORD pid_two)`: Quantifies spatial layout changes and highlights relative allocation deltas ($Memory_{Target1} - Memory_{Target2}$).
+* `protectRam(DWORD pidPlus)`: The core runtime engine providing structural watchpoints to capture malicious heap growths or algorithmic infinite loops.
+
+---
+
+## 📦 Building and Deployment Specifications
+
+### Setup Prerequisite Requirements
+* **Platform OS Target:** Microsoft Windows 7 / 8 / 10 / 11 Desktop Subsystem.
+* **Build Stack:** Native MSVC Toolchain or MinGW (GCC Base) runtime configuration setup.
+
+### Direct Build Command Link Execution
 ```bash
-g++ -O3 main.cpp -o RamMonitor -lpsapi
+g++ -O3 main.cpp -o MemoryGuardian -lpsapi
